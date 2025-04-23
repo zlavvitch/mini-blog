@@ -35,8 +35,9 @@ npm run dev
 
 ## Архетиктура
 
-Проект использует Feature-Sliced Design (FSD):
+Проект использует [Feature-Sliced Design (FSD)](https://feature-sliced.design/):
 
+```txt
 src/
 ├── app/         # Инициализация, роутинг, провайдеры
 ├── pages/       # Страницы (HomePage, PostPage)
@@ -44,6 +45,7 @@ src/
 ├── entities/    # Сущности (Post, Comment, Reaction)
 ├── widgets/     # Составные блоки (PostList, CommentList)
 ├── shared/      # Переиспользуемые компоненты и утилиты
+```
 
 ---
 
