@@ -12,7 +12,7 @@ import { useReactions } from "../../entities/reaction/model/useReactions";
 import { useComments } from "../../features/commentBlock/model/useComments";
 import { wrapperLayout, header, title, main, footer } from "./styles";
 
-export const Layout = (): JSX.Element => {
+export const Layout = () => {
   const { updatePost, removePost } = usePosts();
   const { removeAllCommentsPost } = useComments();
   const { removeReaction } = useReactions();
