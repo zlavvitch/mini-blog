@@ -8,6 +8,8 @@ interface CreatePostModalProps {
 }
 
 export const CreatePostModal = ({ isOpen, onClose }: CreatePostModalProps) => {
+  if (!isOpen) return null;
+
   const { addPost } = usePosts();
 
   const handleSubmit = (data: NewPost) => {

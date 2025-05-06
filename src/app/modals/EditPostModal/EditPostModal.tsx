@@ -14,6 +14,8 @@ export const EditPostModal = ({
   onClose,
   onSubmit,
 }: EditPostModalProps) => {
+  if (!isOpen) return null;
+
   const handleSubmit = (updateData: NewPost) => {
     onSubmit({ ...post, ...updateData });
   };
