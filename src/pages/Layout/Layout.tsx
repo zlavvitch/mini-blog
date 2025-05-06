@@ -58,7 +58,7 @@ export const Layout = () => {
         />
       ) : null}
 
-      {postToEdit ? (
+      {postToEdit && isEditOpen ? (
         <EditPostModal
           isOpen={isEditOpen}
           post={postToEdit}
@@ -76,9 +76,9 @@ export const Layout = () => {
           onClose={resetDeleteState}
           onConfirm={() => {
             const id = postIdToDelete;
+
             if (!id) {
               resetDeleteState();
-              return null;
             }
 
             removeAllCommentsPost(id);
