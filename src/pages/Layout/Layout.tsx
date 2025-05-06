@@ -42,50 +42,105 @@ export const Layout = () => {
     setIsDeleteOpen,
   };
 
+  const createModal = isModalOpen ? (
+    <CreatePostModal
+      isOpen={isModalOpen}
+      onClose={() => setModalOpen(false)}
+    />
+  ) : null;
+
+  const editModal =
+    isEditOpen && postToEdit !== null ? (
+      <EditPostModal
+        isOpen={isEditOpen}
+        post={postToEdit}
+        onClose={resetEditState}
+        onSubmit={(updatedPost) => {
+          updatePost(updatedPost);
+          resetEditState();
+        }}
+      />
+    ) : null;
+
+  const deleteModal =
+    isDeleteOpen && postIdToDelete !== null ? (
+      <DeletePostModal
+        isOpen={isDeleteOpen}
+        postId={postIdToDelete}
+        onClose={resetDeleteState}
+        onConfirm={() => {
+          removeAllCommentsPost(postIdToDelete);
+          removePost(postIdToDelete);
+          removeReaction(postIdToDelete);
+          resetDeleteState();
+        }}
+      />
+    ) : null;
+
   return (
     <div className={wrapperLayout}>
       <header className={header}>
         <h1 className={title}>MiniBlog</h1>
         <Button preset="create" onClick={() => setModalOpen(true)} />
       </header>
+
       <main className={main}>
         <Outlet context={layoutContext} />
       </main>
+
       <footer className={footer} />
-      {isModalOpen ? (
-        <CreatePostModal
-          isOpen={isModalOpen}
-          onClose={() => setModalOpen(false)}
-        />
-      ) : null}
 
-      {postToEdit && isEditOpen ? (
-        <EditPostModal
-          isOpen={isEditOpen}
-          post={postToEdit}
-          onClose={resetEditState}
-          onSubmit={(updatedPost) => {
-            updatePost(updatedPost);
-            resetEditState();
-          }}
-        />
-      ) : null}
-      {isDeleteOpen && postIdToDelete !== null
-        ? ((
-            <DeletePostModal
-              isOpen={isDeleteOpen}
-              postId={postIdToDelete}
-              onClose={resetDeleteState}
-              onConfirm={() => {
-                removeAllCommentsPost(postIdToDelete);
-                removePost(postIdToDelete);
-                removeReaction(postIdToDelete);
-
-                resetDeleteState();
-              }}
-            />
-          ) as React.ReactElement)
-        : null}
+      {createModal}
+      {editModal}
+      {deleteModal}
     </div>
   );
 };
+
+//   return (
+//     <div className={wrapperLayout}>
+//       <header className={header}>
+//         <h1 className={title}>MiniBlog</h1>
+//         <Button preset="create" onClick={() => setModalOpen(true)} />
+//       </header>
+//       <main className={main}>
+//         <Outlet context={layoutContext} />
+//       </main>
+//       <footer className={footer} />
+//       {isModalOpen ? (
+//         <CreatePostModal
+//           isOpen={isModalOpen}
+//           onClose={() => setModalOpen(false)}
+//         />
+//       ) : null}
+
+//       {postToEdit && isEditOpen ? (
+//         <EditPostModal
+//           isOpen={isEditOpen}
+//           post={postToEdit}
+//           onClose={resetEditState}
+//           onSubmit={(updatedPost) => {
+//             updatePost(updatedPost);
+//             resetEditState();
+//           }}
+//         />
+//       ) : null}
+//       {isDeleteOpen && postIdToDelete !== null
+//         ? ((
+//             <DeletePostModal
+//               isOpen={isDeleteOpen}
+//               postId={postIdToDelete}
+//               onClose={resetDeleteState}
+//               onConfirm={() => {
+//                 removeAllCommentsPost(postIdToDelete);
+//                 removePost(postIdToDelete);
+//                 removeReaction(postIdToDelete);
+
+//                 resetDeleteState();
+//               }}
+//             />
+//           ) as React.ReactElement)
+//         : null}
+//     </div>
+//   );
+// };
