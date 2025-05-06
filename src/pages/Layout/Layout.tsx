@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, JSX } from "react";
 import { Outlet } from "react-router-dom";
 import {
   EditPostModal,
@@ -12,7 +12,7 @@ import { useReactions } from "../../entities/reaction/model/useReactions";
 import { useComments } from "../../features/commentBlock/model/useComments";
 import { wrapperLayout, header, title, main, footer } from "./styles";
 
-export const Layout = () => {
+export const Layout = (): JSX.Element => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
@@ -40,6 +40,7 @@ export const Layout = () => {
   const { updatePost, removePost } = usePosts();
 
   if (!postIdToDelete) return;
+
   removePost(postIdToDelete);
   const { emoveAllCommentsPost } = useComments(postIdToDelete);
   const { removeReaction } = useReactions(postIdToDelete);

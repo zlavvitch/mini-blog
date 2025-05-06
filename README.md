@@ -6,8 +6,7 @@
 
 ## Демо
 
-[Посмотреть демо](https://mini-blog.vercel.app)
-![Скриншот](./public/screenshot.png) 
+[Посмотреть демо](https://mini-blog-otug.vercel.app)
 
 ---
 
