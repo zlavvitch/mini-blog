@@ -3,7 +3,7 @@
     "tsBuildInfoFile": "./.tsbuildinfo/node.tsbuildinfo",
     "incremental": true,
     "target": "ES2022",
-    "lib": ["ES2023"],
+    "lib": ["ESNext", "dom", "dom.iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
 

@@ -1,0 +1,1 @@
+export { postStorage } from "./postStorage";

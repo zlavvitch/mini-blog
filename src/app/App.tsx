@@ -1,9 +1,12 @@
-function App() {
+import { AppRouter } from "./router";
+import { initLocalStorage } from "./providers/initLocalStorage";
+
+initLocalStorage();
+
+export function App() {
   return (
     <>
-      <div className="text-red-500">Hello</div>
+      <AppRouter />
     </>
   );
 }
-
-export default App;
