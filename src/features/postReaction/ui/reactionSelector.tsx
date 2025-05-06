@@ -2,6 +2,7 @@ import { IconButton } from "../../../shared/ui";
 import { ReactionType } from "../../../entities/reaction/module/types";
 import { useReactions } from "../../../entities/reaction/model/useReactions";
 import { reactionEmojis } from "./reactionEmojis";
+import { useMemo } from "react";
 
 type ReactionSelectorProps = {
   postId: string;
@@ -12,7 +13,9 @@ export const ReactionSelector = ({
   postId,
   variant = "single",
 }: ReactionSelectorProps) => {
-  const { stats, toggleReaction } = useReactions();
+  const { getStatsForPost, toggleReaction } = useReactions();
+
+  const stats = getStatsForPost(postId);
 
   const reactionsToRender: ReactionType[] =
     variant === "single"
