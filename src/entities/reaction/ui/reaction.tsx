@@ -11,5 +11,12 @@ export interface ReactionProps {
 }
 
 export const Reaction = ({ type, count, ...porps }: ReactionProps) => {
-  return <IconButton icon={reactionEmojis[type]} count={count} {...porps} />;
+  return (
+    <IconButton
+      icon={reactionEmojis[type]}
+      count={count}
+      variant="single"
+      {...porps}
+    />
+  );
 };
