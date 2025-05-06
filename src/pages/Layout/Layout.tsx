@@ -1,4 +1,4 @@
-import { useState, JSX } from "react";
+import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import {
   EditPostModal,
@@ -69,7 +69,7 @@ export const Layout = () => {
           }}
         />
       ) : null}
-      {postIdToDelete ? (
+      {postIdToDelete && isDeleteOpen ? (
         <DeletePostModal
           isOpen={isDeleteOpen}
           postId={postIdToDelete}
