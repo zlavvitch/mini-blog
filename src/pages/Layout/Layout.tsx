@@ -69,21 +69,15 @@ export const Layout = () => {
           }}
         />
       ) : null}
-      {postIdToDelete && isDeleteOpen ? (
+      {isDeleteOpen && postIdToDelete !== null ? (
         <DeletePostModal
           isOpen={isDeleteOpen}
           postId={postIdToDelete}
           onClose={resetDeleteState}
           onConfirm={() => {
-            const id = postIdToDelete;
-
-            if (!id) {
-              resetDeleteState();
-            }
-
-            removeAllCommentsPost(id);
-            removePost(id);
-            removeReaction(id);
+            removeAllCommentsPost(postIdToDelete);
+            removePost(postIdToDelete);
+            removeReaction(postIdToDelete);
 
             resetDeleteState();
           }}
