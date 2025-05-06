@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import {
@@ -69,20 +70,22 @@ export const Layout = () => {
           }}
         />
       ) : null}
-      {isDeleteOpen && postIdToDelete !== null ? (
-        <DeletePostModal
-          isOpen={isDeleteOpen}
-          postId={postIdToDelete}
-          onClose={resetDeleteState}
-          onConfirm={() => {
-            removeAllCommentsPost(postIdToDelete);
-            removePost(postIdToDelete);
-            removeReaction(postIdToDelete);
+      {isDeleteOpen && postIdToDelete !== null
+        ? ((
+            <DeletePostModal
+              isOpen={isDeleteOpen}
+              postId={postIdToDelete}
+              onClose={resetDeleteState}
+              onConfirm={() => {
+                removeAllCommentsPost(postIdToDelete);
+                removePost(postIdToDelete);
+                removeReaction(postIdToDelete);
 
-            resetDeleteState();
-          }}
-        />
-      ) : null}
+                resetDeleteState();
+              }}
+            />
+          ) as React.ReactElement)
+        : null}
     </div>
   );
 };
