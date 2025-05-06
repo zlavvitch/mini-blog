@@ -8,7 +8,7 @@ interface CreatePostModalProps {
 }
 
 export const CreatePostModal = ({ isOpen, onClose }: CreatePostModalProps) => {
-  if (!isOpen) return null;
+  
 
   const { addPost } = usePosts();
 
@@ -22,6 +22,8 @@ export const CreatePostModal = ({ isOpen, onClose }: CreatePostModalProps) => {
     addPost(newPost);
   };
 
+  if (!isOpen) return null;
+  
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <PostForm

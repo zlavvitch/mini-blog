@@ -15,7 +15,7 @@ export const PostPage = () => {
   const { addComment, removeComment, getAllComments } = useComments();
   const { id } = useParams<{ id: string }>();
 
-  const post = id ? getPost(id) : undefined;
+  const post = id ? getPost(id) : null;
 
   if (!id || !post) return <NotFoundPage />;
 
