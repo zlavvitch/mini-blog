@@ -39,8 +39,6 @@ export const Layout = (): JSX.Element => {
 
   const { updatePost, removePost } = usePosts();
 
-  if (!postIdToDelete) return;
-
   removePost(postIdToDelete);
   const { emoveAllCommentsPost } = useComments(postIdToDelete);
   const { removeReaction } = useReactions(postIdToDelete);

@@ -22,7 +22,7 @@ export const PostPage = () => {
   const { getPost } = usePosts();
 
   const post = id ? getPost(id) : undefined;
-  if (!id) return <NotFoundPage />;
+  // if (!id) return <NotFoundPage />;
   const { addComment, removeComment, getAllComments } = useComments(id);
 
   useEffect(() => {

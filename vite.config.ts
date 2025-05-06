@@ -9,13 +9,5 @@ const __dirname = path.dirname(__filename);
 
 export default defineConfig({
   base: "/",
-  plugins: [
-    react(),
-    tsconfigPaths({
-      projects: ["./tsconfig.app.json"],
-    }),
-  ],
-  resolve: {
-    alias: { "@": path.resolve(__dirname, "../") },
-  },
+  plugins: [react(), tsconfigPaths()],
 });
