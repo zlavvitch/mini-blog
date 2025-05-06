@@ -1,6 +1,7 @@
-import React from "react";
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
+import type { ReactElement } from "react";
+
 import {
   EditPostModal,
   DeletePostModal,
@@ -13,7 +14,7 @@ import { useReactions } from "../../entities/reaction/model/useReactions";
 import { useComments } from "../../features/commentBlock/model/useComments";
 import { wrapperLayout, header, title, main, footer } from "./styles";
 
-export const Layout = () => {
+export const Layout = (): ReactElement => {
   const { updatePost, removePost } = usePosts();
   const { removeAllCommentsPost } = useComments();
   const { removeReaction } = useReactions();
@@ -43,10 +44,7 @@ export const Layout = () => {
   };
 
   const createModal = isModalOpen ? (
-    <CreatePostModal
-      isOpen={isModalOpen}
-      onClose={() => setModalOpen(false)}
-    />
+    <CreatePostModal isOpen={isModalOpen} onClose={() => setModalOpen(false)} />
   ) : null;
 
   const editModal =
@@ -96,51 +94,3 @@ export const Layout = () => {
     </div>
   );
 };
-
-//   return (
-//     <div className={wrapperLayout}>
-//       <header className={header}>
-//         <h1 className={title}>MiniBlog</h1>
-//         <Button preset="create" onClick={() => setModalOpen(true)} />
-//       </header>
-//       <main className={main}>
-//         <Outlet context={layoutContext} />
-//       </main>
-//       <footer className={footer} />
-//       {isModalOpen ? (
-//         <CreatePostModal
-//           isOpen={isModalOpen}
-//           onClose={() => setModalOpen(false)}
-//         />
-//       ) : null}
-
-//       {postToEdit && isEditOpen ? (
-//         <EditPostModal
-//           isOpen={isEditOpen}
-//           post={postToEdit}
-//           onClose={resetEditState}
-//           onSubmit={(updatedPost) => {
-//             updatePost(updatedPost);
-//             resetEditState();
-//           }}
-//         />
-//       ) : null}
-//       {isDeleteOpen && postIdToDelete !== null
-//         ? ((
-//             <DeletePostModal
-//               isOpen={isDeleteOpen}
-//               postId={postIdToDelete}
-//               onClose={resetDeleteState}
-//               onConfirm={() => {
-//                 removeAllCommentsPost(postIdToDelete);
-//                 removePost(postIdToDelete);
-//                 removeReaction(postIdToDelete);
-
-//                 resetDeleteState();
-//               }}
-//             />
-//           ) as React.ReactElement)
-//         : null}
-//     </div>
-//   );
-// };
