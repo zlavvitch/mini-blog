@@ -51,14 +51,14 @@ export const Layout = (): JSX.Element => {
         <Outlet context={layoutContext} />
       </main>
       <footer className={footer} />
-      {isModalOpen && (
+      {isModalOpen ? (
         <CreatePostModal
           isOpen={isModalOpen}
           onClose={() => setModalOpen(false)}
         />
-      )}
+      ) : null}
 
-      {postToEdit && (
+      {postToEdit ? (
         <EditPostModal
           isOpen={isEditOpen}
           post={postToEdit}
@@ -68,8 +68,8 @@ export const Layout = (): JSX.Element => {
             resetEditState();
           }}
         />
-      )}
-      {postIdToDelete && (
+      ) : null}
+      {postIdToDelete ? (
         <DeletePostModal
           isOpen={isDeleteOpen}
           postId={postIdToDelete}
@@ -85,7 +85,7 @@ export const Layout = (): JSX.Element => {
             resetDeleteState();
           }}
         />
-      )}
+      ) : null}
     </div>
   );
 };
