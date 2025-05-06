@@ -38,6 +38,9 @@ export const Layout = () => {
   };
 
   const { updatePost, removePost } = usePosts();
+
+  if (!postIdToDelete) return;
+  removePost(postIdToDelete);
   const { emoveAllCommentsPost } = useComments(postIdToDelete);
   const { removeReaction } = useReactions(postIdToDelete);
 

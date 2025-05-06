@@ -10,7 +10,6 @@ import { PostCard } from "../../entities";
 import { CommentList } from "../../widgets";
 import { useComments } from "../../features/commentBlock/model/useComments";
 import { usePosts } from "../../shared/lib";
-import type { Post } from "../../entities";
 import { wrapperPostPage, linkClass } from "./styles";
 import { useEffect } from "react";
 
@@ -23,6 +22,7 @@ export const PostPage = () => {
   const { getPost } = usePosts();
 
   const post = id ? getPost(id) : undefined;
+  if (!id) return <NotFoundPage />;
   const { addComment, removeComment, getAllComments } = useComments(id);
 
   useEffect(() => {

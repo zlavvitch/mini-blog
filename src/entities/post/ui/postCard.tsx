@@ -1,5 +1,5 @@
-import { PostCardFull } from "./PostCardFull";
-import { PostCardCompact } from "./PostCardCompact";
+import { PostCardFull } from "./postCardFull";
+import { PostCardCompact } from "./postCardCompact";
 import { PostCardProps } from "./types";
 
 export const PostCard = ({
