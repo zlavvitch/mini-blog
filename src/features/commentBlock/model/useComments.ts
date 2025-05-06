@@ -9,44 +9,31 @@ type ShortComment = {
   text: string;
 };
 
-export const useComments = (postId: string) => {
+export const useComments = () => {
   const [comments, setComments] = useState<Comment[]>([]);
 
   useEffect(() => {
     const allComments = commentStorage.getAll();
-    const filteredComments = allComments
-      .filter((comment) => comment.id === postId)
-      .sort(
-        (a, b) =>
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-      );
 
-    setComments(filteredComments);
-  }, [postId]);
+    setComments(allComments);
+  }, []);
 
   const getAllComments = useCallback((postId: string) => {
-    if (!postId) return [];
-
     return commentStorage
       .getAll()
       .filter((comment) => comment.postId === postId);
   }, []);
 
-  const addComment = useCallback(
-    (comment: ShortComment) => {
-      if (!postId) return [];
+  const addComment = useCallback((comment: ShortComment) => {
+    const newComment: Comment = {
+      ...comment,
+      id: generateId(),
+      createdAt: new Date().toISOString(),
+    };
 
-      const newComment: Comment = {
-        ...comment,
-        id: generateId(),
-        createdAt: new Date().toISOString(),
-      };
-
-      commentStorage.add(newComment);
-      setComments((prev) => [newComment, ...prev]);
-    },
-    [postId]
-  );
+    commentStorage.add(newComment);
+    setComments((prev) => [newComment, ...prev]);
+  }, []);
 
   const removeComment = useCallback((id: string) => {
     commentStorage.remove((comment) => comment.id === id);
@@ -54,7 +41,7 @@ export const useComments = (postId: string) => {
     setComments(commentStorage.getAll());
   }, []);
 
-  const emoveAllCommentsPost = useCallback((postId: string) => {
+  const removeAllCommentsPost = useCallback((postId: string) => {
     commentStorage.remove((comment) => comment.postId === postId);
 
     setComments(commentStorage.getAll());
@@ -64,7 +51,7 @@ export const useComments = (postId: string) => {
     comments,
     addComment,
     removeComment,
-    emoveAllCommentsPost,
+    removeAllCommentsPost,
     getAllComments,
   };
 };

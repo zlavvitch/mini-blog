@@ -12,7 +12,7 @@ export const ReactionSelector = ({
   postId,
   variant = "single",
 }: ReactionSelectorProps) => {
-  const { stats, toggleReaction } = useReactions(postId);
+  const { stats, toggleReaction } = useReactions();
 
   const reactionsToRender: ReactionType[] =
     variant === "single"
@@ -27,7 +27,7 @@ export const ReactionSelector = ({
           icon={reactionEmojis[type]}
           count={stats[type] ?? 0}
           variant={variant}
-          onClick={() => toggleReaction(type)}
+          onClick={() => toggleReaction(postId, type)}
         />
       ))}
     </div>

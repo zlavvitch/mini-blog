@@ -13,6 +13,10 @@ import { useComments } from "../../features/commentBlock/model/useComments";
 import { wrapperLayout, header, title, main, footer } from "./styles";
 
 export const Layout = (): JSX.Element => {
+  const { updatePost, removePost } = usePosts();
+  const { removeAllCommentsPost } = useComments();
+  const { removeReaction } = useReactions();
+
   const [isModalOpen, setModalOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
@@ -36,12 +40,6 @@ export const Layout = (): JSX.Element => {
     setPostIdToDelete,
     setIsDeleteOpen,
   };
-
-  const { updatePost, removePost } = usePosts();
-
-  removePost(postIdToDelete);
-  const { emoveAllCommentsPost } = useComments(postIdToDelete);
-  const { removeReaction } = useReactions(postIdToDelete);
 
   return (
     <div className={wrapperLayout}>
@@ -77,11 +75,12 @@ export const Layout = (): JSX.Element => {
           postId={postIdToDelete}
           onClose={resetDeleteState}
           onConfirm={() => {
-            if (!postIdToDelete) return;
+            const id = postIdToDelete;
+            if (!id) return;
 
-            emoveAllCommentsPost(postIdToDelete);
-            removePost(postIdToDelete);
-            removeReaction(postIdToDelete);
+            removeAllCommentsPost(id);
+            removePost(id);
+            removeReaction(id);
 
             resetDeleteState();
           }}

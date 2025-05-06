@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ReactionType, PostReaction } from "../module/types";
 import { reactionStorage } from "./reactionStorage";
 import { generateId } from "../../../shared/lib";
@@ -10,12 +10,14 @@ const initialStats: Record<ReactionType, number> = {
   sad: 0,
 };
 
-export function useReactions(postId: string) {
-  const [reactions, setReactions] = useState<PostReaction[]>(() =>
-    reactionStorage.getAll().filter((r) => r.postId === postId)
-  );
+export function useReactions() {
+  const [reactions, setReactions] = useState<PostReaction[]>([]);
 
-  const currentReaction = reactions.find((r) => r.postId === postId);
+  useEffect(() => {
+    const allReaction = reactionStorage.getAll();
+
+    setReactions(allReaction);
+  }, []);
 
   const stats = reactions.reduce<Record<ReactionType, number>>(
     (acc, r) => {
@@ -25,7 +27,8 @@ export function useReactions(postId: string) {
     { ...initialStats }
   );
 
-  const toggleReaction = (newType: ReactionType) => {
+  const toggleReaction = (postId: string, newType: ReactionType) => {
+    const currentReaction = reactions.find((r) => r.postId === postId);
     if (currentReaction) {
       if (currentReaction.type === newType) return;
 
@@ -50,7 +53,6 @@ export function useReactions(postId: string) {
 
   return {
     stats,
-    currentReaction,
     removeReaction,
     toggleReaction,
   };
