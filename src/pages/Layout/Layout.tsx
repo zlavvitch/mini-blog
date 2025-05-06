@@ -76,7 +76,10 @@ export const Layout = () => {
           onClose={resetDeleteState}
           onConfirm={() => {
             const id = postIdToDelete;
-            if (!id) return;
+            if (!id) {
+              resetDeleteState();
+              return null;
+            }
 
             removeAllCommentsPost(id);
             removePost(id);
