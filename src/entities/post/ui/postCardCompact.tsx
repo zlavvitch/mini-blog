@@ -26,7 +26,7 @@ export const PostCardCompact = ({
   onEditClick,
   onDeleteClick,
 }: PostCardCompactProps) => {
-  const { getAllComments } = useComments(postId);
+  const { getAllComments } = useComments();
   const commentsLength = getAllComments(postId).length;
 
   return (

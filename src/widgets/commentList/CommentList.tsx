@@ -24,7 +24,7 @@ export const CommentList = ({
   ...props
 }: CommentListProps) => {
   
-  const { getAllComments } = useComments(postId);
+  const { getAllComments } = useComments();
   const commentsLength = getAllComments(postId).length;
 
   return (
